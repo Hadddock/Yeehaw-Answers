@@ -29,7 +29,7 @@ async function main() {
   mongoose.connection.close();
 }
 
-async function authorCreate(index, username, date_of_birth, date_joined) {
+async function userCreate(index, username, date_of_birth, date_joined) {
   const userdetail = { username: username };
   if (date_joined != false) userdetail.date_of_birth = date_joined;
   if (date_of_birth != false) userdetail.date_of_death = date_of_birth;
@@ -42,7 +42,7 @@ async function authorCreate(index, username, date_of_birth, date_joined) {
 async function createUsers() {
   console.log("Adding users");
   await Promise.all([
-    authorCreate(0, "SaveSerael", "1973-06-06", "2000-03-06"),
-    authorCreate(1, "LayerOcctavia", "1975-09-06", "2001-04-06"),
+    userCreate(0, "SaveSerael", "1973-06-06", "2000-03-06"),
+    userCreate(1, "LayerOcctavia", "1975-09-06", "2001-04-06"),
   ]);
 }
