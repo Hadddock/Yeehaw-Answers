@@ -2,10 +2,6 @@ const User = require("../models/user");
 
 const asyncHandler = require("express-async-handler");
 
-exports.index = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Site Home Page");
-});
-
 // Display list of all users.
 exports.user_list = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: user list");
