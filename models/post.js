@@ -8,6 +8,7 @@ const PostSchema = new Schema({
   date_posted: { type: Date },
   date_last_edited: { type: Date },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  comment: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 module.exports = mongoose.model("Post", PostSchema);
