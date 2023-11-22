@@ -20,7 +20,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display list of all posts.
 exports.post_list = asyncHandler(async (req, res, next) => {
-  const allPosts = await Post.find({}, "title").exec();
+  const allPosts = await Post.find({}, "title body").exec();
 
   res.render("post_list", {
     title: "Post List",
