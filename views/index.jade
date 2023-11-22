@@ -2,4 +2,13 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em Yeehaw Answers], a question and answer forum.
+
+  h1 Dynamic content
+
+  p The database has the following record counts:
+
+  ul
+    li #[strong Posts:] !{post_count}
+    li #[strong Users:] !{user_count}
+    li #[strong Comments:] !{comment_count}
