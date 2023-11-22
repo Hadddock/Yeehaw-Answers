@@ -28,8 +28,9 @@ async function main() {
   console.log("Debug: Should be connected?");
 
   await createUsers();
-  await createPosts();
+
   await createComments();
+  await createPosts();
 
   console.log("Debug: Closing mongoose");
   mongoose.connection.close();
@@ -63,7 +64,7 @@ async function postCreate(
     user: user,
     comment: comment,
   };
-  if (date_last_edited != false) userdetail.date_last_edited = date_last_edited;
+  if (date_last_edited != false) postdetail.date_last_edited = date_last_edited;
 
   const post = new Post(postdetail);
   await post.save();
@@ -90,6 +91,7 @@ async function commentCreate(
 
   const comment = new Comment(commentdetail);
   await comment.save();
+
   comments[index] = comment;
   console.log(`Added comment: ${body}`);
 }
@@ -105,25 +107,29 @@ async function createUsers() {
 async function createPosts() {
   console.log("Adding Posts");
   await Promise.all([
-    postCreate(0, "What Can I do to stop negative thoughts?"),
-    "Lately, I have had many negative thoughts that just drain my energy.   Overall, my life is okay and I'm not sure why my thinking has become very negative.How can I get rid of negative thoughts that are persistent and seem like they won't go away? Any advice would be appreciated.  Thank you for answering my questions.",
-    "Social Science",
-    new Date(),
-    null,
-    users[0],
-    [comments[0], comments[1]],
+    postCreate(
+      0,
+      "What Can I do to stop negative thoughts?",
+      "Lately, I have had many negative thoughts that just drain my energy.   Overall, my life is okay and I'm not sure why my thinking has become very negative.How can I get rid of negative thoughts that are persistent and seem like they won't go away? Any advice would be appreciated.  Thank you for answering my questions.",
+      "Social Science",
+      new Date(),
+      null,
+      users[0],
+      [comments[0], comments[1]]
+    ),
   ]);
 }
 
 async function createComments() {
   console.log("Adding Comments");
   await Promise.all([
-    commentCreate(0, "What Can I do to stop negative thoughts?"),
-    "Lately, I have had many negative thoughts that just drain my energy.   Overall, my life is okay and I'm not sure why my thinking has become very negative.How can I get rid of negative thoughts that are persistent and seem like they won't go away? Any advice would be appreciated.  Thank you for answering my questions.",
-    "Social Science",
-    new Date(),
-    null,
-    null,
-    users[1],
+    commentCreate(
+      0,
+      "When you're in a bad mood, look at the thought that triggered it. See if it's false or otherwise useless. If it is, let it go and replace it with two positive thoughts. Count your blessings, and remind yourself of your past successes. Stop and smell the roses. I've answered a lot of mental health questions, with advice from experts about a variety of problems. There's a lot of things that can help. For example, you might be interested in stress management advice. Research has come up with various things that are effective and easy if not downright fun.",
+      new Date(),
+      null,
+      null,
+      users[1]
+    ),
   ]);
 }
