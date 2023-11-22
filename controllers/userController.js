@@ -2,11 +2,6 @@ const User = require("../models/user");
 
 const asyncHandler = require("express-async-handler");
 
-// Display list of all users.
-exports.user_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: user list");
-});
-
 // Display detail page for a specific user.
 exports.user_detail = asyncHandler(async (req, res, next) => {
   res.send(`NOT IMPLEMENTED: user detail: ${req.params.id}`);

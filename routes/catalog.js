@@ -58,9 +58,6 @@ router.post("/user/:id/update", user_controller.user_update_post);
 // GET request for one User.
 router.get("/user/:id", user_controller.user_detail);
 
-// GET request for list of all Users.
-router.get("/users", user_controller.user_list);
-
 /// COMMENT ROUTES ///
 
 // GET request for creating a Comment. NOTE This must come before route that displays Comment (uses id).
@@ -83,8 +80,5 @@ router.post("/comment/:id/update", comment_controller.comment_update_post);
 
 // GET request for one Comment.
 router.get("/comment/:id", comment_controller.comment_detail);
-
-// GET request for list of all Comment.
-router.get("/comments", comment_controller.comment_list);
 
 module.exports = router;

@@ -2,11 +2,6 @@ const comment = require("../models/comment");
 
 const asyncHandler = require("express-async-handler");
 
-// Display list of all comments.
-exports.comment_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: comment list");
-});
-
 // Display detail page for a specific comment.
 exports.comment_detail = asyncHandler(async (req, res, next) => {
   res.send(`NOT IMPLEMENTED: comment detail: ${req.params.id}`);
