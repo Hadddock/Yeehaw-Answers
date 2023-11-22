@@ -42,4 +42,8 @@ const PostSchema = new Schema({
   comment: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
+PostSchema.virtual("url").get(function () {
+  return `/catalog/post/${this._id}`;
+});
+
 module.exports = mongoose.model("Post", PostSchema);

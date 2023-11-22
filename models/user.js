@@ -12,4 +12,8 @@ UserSchema.virtual("time_active").get(function () {
   return new Date() - this.date_of_birth;
 });
 
+UserSchema.virtual("url").get(function () {
+  return `/catalog/user/${this._id}`;
+});
+
 module.exports = mongoose.model("User", UserSchema);
