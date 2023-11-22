@@ -1,14 +1,31 @@
 const Post = require("../models/post");
+const User = require("../models/user");
+const Comment = require("../models/comment");
 
 const asyncHandler = require("express-async-handler");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Site Home Page");
+  const [post_count, user_count, comment_count] = await Promise.all([
+    Post.countDocuments({}).exec(),
+    User.countDocuments({}).exec(),
+    Comment.countDocuments({}).exec(),
+  ]);
+  res.render("index", {
+    title: "Yeehaw Answers Home",
+    user_count: user_count,
+    comment_count: comment_count,
+    post_count: post_count,
+  });
 });
 
 // Display list of all posts.
 exports.post_list = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: post list");
+  const allPosts = await Post.find({}, "title").exec();
+
+  res.render("post_list", {
+    title: "Post List",
+    post_list: allPosts,
+  });
 });
 
 // Display detail page for a specific post.
