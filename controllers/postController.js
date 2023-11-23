@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Comment = require("../models/comment");
 
 const asyncHandler = require("express-async-handler");
+const comment = require("../models/comment");
 
 exports.index = asyncHandler(async (req, res, next) => {
   const [post_count, user_count, comment_count] = await Promise.all([
@@ -30,7 +31,11 @@ exports.post_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific post.
 exports.post_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: post detail: ${req.params.id}`);
+  const [post] = await Promise.all([
+    Post.findById(req.params.id).populate("user comment").exec(),
+  ]);
+
+  res.render("post_detail", { post: post });
 });
 
 // Display post create form on GET.

@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h1
+        a(href=post.user.url)=post.user.username
+    h1=post.title
+    p=post.body
+    ul 
+        for comment in post.comment
+            li
+                h2=comment.user
+                p=comment.body
