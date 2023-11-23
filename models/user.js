@@ -16,4 +16,14 @@ UserSchema.virtual("url").get(function () {
   return `/catalog/user/${this._id}`;
 });
 
+UserSchema.virtual("date_of_birth_formatted").get(function () {
+  return DateTime.fromJSDate(this.date_of_birth).toLocaleString(
+    DateTime.DATE_ME
+  );
+});
+
+UserSchema.virtual("date_joined").get(function () {
+  return DateTime.fromJSDate(this.date_joined).toLocaleString(DateTime.DATE_ME);
+});
+
 module.exports = mongoose.model("User", UserSchema);
