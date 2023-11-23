@@ -42,6 +42,16 @@ const PostSchema = new Schema({
   comment: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
+PostSchema.virtual("date_posted_formatted").get(function () {
+  return DateTime.fromJSDate(this.date_posted).toLocaleString(DateTime.DATE_ME);
+});
+
+PostSchema.virtual("date_last_edited_formatted").get(function () {
+  return DateTime.fromJSDate(this.date_last_edited).toLocaleString(
+    DateTime.DATE_ME
+  );
+});
+
 PostSchema.virtual("url").get(function () {
   return `/catalog/post/${this._id}`;
 });
