@@ -22,7 +22,7 @@ UserSchema.virtual("date_of_birth_formatted").get(function () {
   );
 });
 
-UserSchema.virtual("date_joined").get(function () {
+UserSchema.virtual("date_joined_formatted").get(function () {
   return DateTime.fromJSDate(this.date_joined).toLocaleString(DateTime.DATE_ME);
 });
 
