@@ -8,5 +8,5 @@ block content
     ul 
         for comment in post.comment
             li
-                h2=comment.user
+                h2=comment.user.username
                 p=comment.body

@@ -32,8 +32,22 @@ exports.post_list = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific post.
 exports.post_detail = asyncHandler(async (req, res, next) => {
   const [post] = await Promise.all([
-    Post.findById(req.params.id).populate("user comment").exec(),
+    Post.findById(req.params.id)
+      .populate("user")
+      .populate({
+        path: "comment",
+        model: "Comment",
+        populate: {
+          path: "user",
+          model: "User",
+          populate: { path: "username" },
+        },
+      })
+      .exec(),
   ]);
+
+  console.log(post.populated("comment.user"));
+  console.log("test");
 
   res.render("post_detail", { post: post });
 });
