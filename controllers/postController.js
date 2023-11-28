@@ -46,9 +46,6 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
       .exec(),
   ]);
 
-  console.log(post.populated("comment.user"));
-  console.log("test");
-
   res.render("post_detail", { post: post });
 });
 
