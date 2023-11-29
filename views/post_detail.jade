@@ -4,9 +4,11 @@ block content
     h1
         a(href=post.user.url)=post.user.username
     h1=post.title
+    p=post.date_posted_formatted
     p=post.body
     ul 
         for comment in post.comment
             li
                 h2=comment.user.username
+                p=comment.date_posted_formatted
                 p=comment.body
