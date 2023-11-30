@@ -27,7 +27,6 @@ exports.comment_create_post = [
     const myValidationResult = validationResult(req);
     const comment = Comment({
       body: req.body.body,
-      post: new ObjectId("655d5ddad96a2f8c2fd09cc0"),
       user: new ObjectId("655d5ddad96a2f8c2fd09cba"),
       date_posted: new Date(),
     });
