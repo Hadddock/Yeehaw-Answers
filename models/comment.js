@@ -5,7 +5,7 @@ const { DateTime } = require("luxon");
 const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
-  body: { type: String, minlength: 3, maxLength: 30000 },
+  body: { type: String, minlength: 1, maxLength: 30000 },
   date_posted: { type: Date },
   date_last_edited: { type: Date },
   comment_parent: { type: Schema.Types.ObjectId, ref: "Comment" },
