@@ -1,0 +1,7 @@
+extends layout 
+
+block content 
+    a(href=comment.user.url)=comment.user.username
+     
+    p=comment.date_posted_formatted
+    p=comment.body

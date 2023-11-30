@@ -4,10 +4,12 @@ const { ObjectId } = require("mongodb");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const { isObjectIdOrHexString } = require("mongoose");
+const { Post } = require("../models/post");
 
 // Display detail page for a specific comment.
 exports.comment_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: comment detail: ${req.params.id}`);
+  const comment = await Comment.findById(req.params.id).populate("user").exec();
+  res.render("comment_detail", { comment: comment });
 });
 
 // Display comment create form on GET.
