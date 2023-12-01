@@ -103,12 +103,22 @@ exports.post_create_post = [
 
 // Display post delete form on GET.
 exports.post_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: post delete GET");
+  const post = await Post.findById(req.params.id).exec();
+  if (post === null) {
+    res.redirect("/catalog/posts");
+  }
+
+  res.render("post_delete", {
+    title: "Delete Post",
+    post: post,
+  });
 });
 
 // Handle post delete on POST.
 exports.post_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: post delete POST");
+  await Post.findByIdAndDelete(req.body.postid);
+
+  res.redirect("/catalog/posts");
 });
 
 // Display post update form on GET.
