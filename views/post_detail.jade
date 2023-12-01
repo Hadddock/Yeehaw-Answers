@@ -3,6 +3,8 @@ extends layout
 block content 
     h1
         a(href=post.user.url)=post.user.username
+    p
+        a(href=post.url+'/update') Update Post
     h1=post.title
     p=post.date_posted_formatted
     p=post.body

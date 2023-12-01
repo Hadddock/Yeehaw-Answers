@@ -113,10 +113,54 @@ exports.post_delete_post = asyncHandler(async (req, res, next) => {
 
 // Display post update form on GET.
 exports.post_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: post update GET");
+  const post = await Post.findById(req.params.id).exec();
+
+  if (post === null) {
+    const err = new Error("Post not found");
+    err.status = 404;
+    return next(err);
+  }
+  res.render("post_form", {
+    title: "Update Post",
+    post: post,
+    categories: categories,
+  });
 });
 
 // Handle post update on POST.
-exports.post_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: post update POST");
-});
+exports.post_update_post = [
+  body("title")
+    .trim()
+    .isLength({ max: 200 })
+    .withMessage("Question Title must be less than 200 characters")
+    .isLength({ min: 5 })
+    .withMessage("Queston Title must be longer than 5 characters"),
+  body("body")
+    .trim()
+    .isLength({ max: 30000 })
+    .withMessage("Question body must be less than 30,000 characters"),
+  body("category").trim().isIn(categories).withMessage("Invalid category"),
+
+  asyncHandler(async (req, res, next) => {
+    const myValidationRequest = validationResult(req);
+    const post = new Post({
+      title: req.body.title,
+      body: req.body.body,
+      category: req.body.category,
+      date_last_edited: new Date(),
+      _id: req.params.id,
+    });
+
+    if (!myValidationRequest.isEmpty()) {
+      res.render("post_form", {
+        post: post,
+        errors: myValidationRequest.array(),
+        title: "Update Post",
+        categories: categories,
+      });
+    } else {
+      const updatedPost = await Post.findByIdAndUpdate(req.params.id, post, {});
+      res.redirect(updatedPost.url);
+    }
+  }),
+];
