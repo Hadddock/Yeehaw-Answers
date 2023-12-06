@@ -1,7 +1,7 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
-const fs = require("fs");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
@@ -13,9 +13,8 @@ const app = express();
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
-const mongoDB = fs.readFileSync("connection-string.txt", "utf-8");
+const mongoDB = process.env.CONNECTION_STRING;
 
-main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
