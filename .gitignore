@@ -3,3 +3,4 @@ node_modules
 package-lock.js
 
 connection-string.txt
+.env
