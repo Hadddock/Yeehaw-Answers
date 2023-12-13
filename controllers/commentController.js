@@ -3,8 +3,6 @@ const { ObjectId } = require("mongodb");
 
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
-const { isObjectIdOrHexString } = require("mongoose");
-const { Post } = require("../models/post");
 
 // Display detail page for a specific comment.
 exports.comment_detail = asyncHandler(async (req, res, next) => {
